@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <title>
+    <%= htmlWebpackPlugin.options.title %>
+  </title>
+  <style>
+    #app {
+      margin-top: 100px;
+    }
+
+    [v-v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+        Please enable it to continue.</strong>
+  </noscript>
+  <div id="app" v-cloak>
+    <form class="container">
+      <div class="form-group">
+        <label for="exampleInputEmail1">用户名</label>
+        <input type="text" class="form-control" placeholder="输入用户名" v-model="name">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">年龄</label>
+        <input type="number" class="form-control" placeholder="输入年龄" v-model="age">
+      </div>
+      <button type="button" class="btn btn-primary" @click="add">添加</button>
+      <button type="button" class="btn btn-danger" @click="resert">重置</button>
+      <hr>
+    </form>
+    <div class="container">
+      <table class="table table-bordered">
+        <caption class="text-center text-info h2">用户信息表</caption>
+        <thead>
+          <tr class="text-danger">
+            <th scope="col" class="text-center">序号</th>
+            <th scope="col" class="text-center">名字</th>
+            <th scope="col" class="text-center">年龄</th>
+            <th scope="col" class="text-center">操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-show="isTrue">
+            <td colspan="4" class="text-center">暂无数据</td>
+          </tr>
+          <tr v-for="(item,index) in user">
+            <td>{{index+1}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.age}}</td>
+            <td class="text-center"><button @click="del(index)" class="btn btn-primary">删除</button></td>
+          </tr>
+          <tr v-show="isShow">
+            <td colspan="4" class="text-center">
+              <button @click="delAll" class="btn btn-primary">删除全部</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- built files will be auto injected -->
+</body>
+
+</html>
